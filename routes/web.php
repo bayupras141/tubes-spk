@@ -1,6 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AlternatifController;
+use App\Http\Controllers\KriteriaController;
+use App\Http\Controllers\PembobotanController;
+use App\Http\Controllers\PenilaianController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +20,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('home');
 });
+
+Route::resources([
+    'alternatif' => AlternatifController::class,
+    'kriteria' => KriteriaController::class,
+    'subkriteria' => PembobotanController::class,
+    'penilaian' => PenilaianController::class,
+    'perhitungan' => PerhitunganController::class,
+]);

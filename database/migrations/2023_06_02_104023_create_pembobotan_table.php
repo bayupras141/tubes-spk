@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             // referen ke kriteria
             $table->foreignId('kriteria_id')->constrained('kriteria');
-            $table->string('range');
+            $table->string('nama');
             $table->Integer('nilai');
             $table->timestamps();
         });

@@ -12,7 +12,9 @@ class PembobotanController extends Controller
      */
     public function index()
     {
-        //
+        $pembobotan = Pembobotan::all();
+
+        return view('skriteria.index', compact('pembobotan'));
     }
 
     /**

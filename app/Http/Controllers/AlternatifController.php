@@ -12,7 +12,9 @@ class AlternatifController extends Controller
      */
     public function index()
     {
-        //
+        $alternatif = Alternatif::all();
+
+        return view('alternatif.index', compact('alternatif'));
     }
 
     /**

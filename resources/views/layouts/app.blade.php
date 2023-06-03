@@ -253,33 +253,18 @@
         <div class="shadow-bottom"></div>
         <div class="main-menu-content">
             <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-                {{-- <li class=" nav-item"><a href="index.html"><i class="feather icon-home"></i><span class="menu-title" data-i18n="Dashboard">Dashboard</span><span class="badge badge badge-warning badge-pill float-right mr-2">2</span></a>
-                    <ul class="menu-content">
-                        <li class="active"><a href="dashboard-analytics.html"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Analytics">Analytics</span></a>
-                        </li>
-                        <li><a href="dashboard-ecommerce.html"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="eCommerce">eCommerce</span></a>
-                        </li>
-                    </ul>
-                </li> --}}
+                {{-- jika diklik makan tombol akan active focus --}}
+
+                
+                
+
+                <li class="nav-item"><a href="/"><i class="feather icon-home"></i><span class="menu-title" data-i18n="Dashboard">Dashboard</span></a></li>
                 <li class=" navigation-header"><span>Apps</span>
                 </li>
-                
-                <li class=" nav-item"><a href="#"><i class="feather icon-sunset"></i><span class="menu-title" data-i18n="Ecommerce">VIKOR</span></a>
-                    <ul class="menu-content">
-                        <li><a href="#"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Shop">Alternatif</span></a></li>
-                        <li><a href="#"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Details">Kriteria</span></a></li>
-                        <li><a href="#"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Wish List">Wish List</span></a></li>
-                        <li><a href="#"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Checkout">Checkout</span></a></li>
-                    </ul>
-                </li>
-                <li class=" nav-item"><a href="#"><i class="feather icon-sunrise"></i><span class="menu-title" data-i18n="User">ARAS</span></a>
-                    <ul class="menu-content">
-                        <li><a href="#"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="List">Alternatif</span></a></li>
-                        <li><a href="#"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="View">Kriteria</span></a></li>
-                        <li><a href="#"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Edit">Edit</span></a></li>
-                    </ul>
-                </li>
-                
+                <li class="nav-item"><a href="/kriteria"><i class="feather icon-box"></i><span class="menu-title" data-i18n="Form Layout">Data Kriteria</span></a></li>
+                <li class="nav-item"><a href="/subkriteria"><i class="feather icon-package"></i><span class="menu-title" data-i18n="Form Wizard">Data Sub Kriteria</span></a></li>
+                <li class="nav-item"><a href="/alternatif"><i class="feather icon-users"></i><span class="menu-title" data-i18n="Form Wizard">Data Alternatif</span></a></li>
+                <li class="nav-item"><a href="/penilaian"><i class="feather icon-file-text"></i><span class="menu-title" data-i18n="Form Wizard">Data Penilaian</span></a></li>
             </ul>
         </div>
     </div>
@@ -304,9 +289,9 @@
     <div class="drag-target"></div>
 
     <!-- BEGIN: Footer-->
-    <footer class="footer footer-static footer-light">
+    {{-- <footer class="footer footer-static footer-light">
         <p class="clearfix blue-grey lighten-2 mb-0"><span class="float-md-left d-block d-md-inline-block mt-25">COPYRIGHT &copy; 2019 All rights Reserved</span></p>
-    </footer>
+    </footer> --}}
     <!-- END: Footer-->
 
 
@@ -314,11 +299,14 @@
     <script src="{{asset('app-assets/vendors/js/vendors.min.js')}}"></script>
     <!-- BEGIN Vendor JS-->
 
+    @stack('before-script')
+    
     <!-- BEGIN: Page Vendor JS-->
     <script src="{{asset('app-assets/vendors/js/charts/apexcharts.min.js')}}"></script>
     <script src="{{asset('app-assets/vendors/js/extensions/tether.min.js')}}"></script>
     {{-- <script src="{{asset('app-assets/vendors/js/extensions/shepherd.min.js')}}"></script> --}}
     <!-- END: Page Vendor JS-->
+    @stack('after-script')
 
     <!-- BEGIN: Theme JS-->
     <script src="{{asset('app-assets/js/core/app-menu.js')}}"></script>
