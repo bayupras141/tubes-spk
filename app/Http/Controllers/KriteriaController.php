@@ -6,7 +6,6 @@ use App\Models\Kriteria;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-
 use DataTables;
 
 class KriteriaController extends Controller
@@ -46,7 +45,7 @@ class KriteriaController extends Controller
      */
     public function create()
     {
-        return view('kriteria.create');
+        
     }
 
     /**
@@ -54,7 +53,36 @@ class KriteriaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // validate
+        $this->validate($request, [
+            'kode_kriteria' => 'required',
+            'nama_kriteria' => 'required',
+            'bobot_kriteria' => 'required',
+            'tipe_kriteria' => 'required',
+        ]);
+
+        // store with update or create
+        Kriteria::updateOrCreate(
+            ['id' => $request->id],
+            [
+                'kode_kriteria' => $request->kode_kriteria,
+                'nama_kriteria' => $request->nama_kriteria,
+                'bobot_kriteria' => $request->bobot_kriteria,
+                'tipe_kriteria' => $request->tipe_kriteria,
+            ]
+        );
+
+        if(!$request->data_id == ''){
+            return response()->json([
+                'status' => 'sukses',
+                'message'=>'Paket berhasil Diubah'
+            ],200);
+        } else {
+            return response()->json([
+                'status' => 'sukses',
+                'message'=>'Paket berhasil Ditambahkan'
+            ],200);
+        }
     }
 
     /**
@@ -70,7 +98,7 @@ class KriteriaController extends Controller
      */
     public function edit(Kriteria $kriteria)
     {
-        //
+        return response()->json($kriteria, 200);
     }
 
     /**
@@ -86,6 +114,10 @@ class KriteriaController extends Controller
      */
     public function destroy(Kriteria $kriteria)
     {
-        //
+        $kriteria->delete();
+        return response()->json([
+            'status' => 'sukses',
+            'message'=>'Kriteria berhasil Dihapus'
+        ],200);
     }
 }

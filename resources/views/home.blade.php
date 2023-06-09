@@ -16,7 +16,7 @@
                         </div>
                         <div class="text-center">
                             <h1 class="mb-2 text-white">Sistem Pendukung Keputusan</h1>
-                            <p class="m-auto w-75">Menggunakan Metode <strong>VIKOR & ARAS</strong></p>
+                            <p class="m-auto w-75">Menggunakan Metode <strong>ROC & ARAS</strong></p>
                         </div>
                     </div>
                 </div>

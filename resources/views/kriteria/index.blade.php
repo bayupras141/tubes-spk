@@ -63,7 +63,7 @@
     <input type="hidden" name="data_id" id="data_id">
     <div class="form-group">
         <label class="form-label" for="basic-icon-default-fullname">Kode Kriteria</label>
-        <input type="text" class="form-control dt-full-name required" id="koode" name="kode" required="">
+        <input type="text" class="form-control dt-full-name required" id="kode_kriteria" name="kode_kriteria" required="">
     </div>
     <div class="form-group">
         <label class="form-label" for="basic-icon-default-post">Nama Kriteria</label>
@@ -72,11 +72,11 @@
     
     <div class="form-group">
         <label class="form-label" for="basic-icon-default-post">Bobot</label>
-        <input type="text" id="bobot" class="form-control dt-post required" name="bobot">
+        <input type="text" id="bobot_kriteria" class="form-control dt-post required" name="bobot_kriteria">
     </div>
     <div class="form-group">
         <label class="form-label" for="basic-icon-default-post">Jenis</label>
-        <input type="text" id="jenis" class="form-control dt-post required" name="jenis">
+        <input type="text" id="tipe_kriteria" class="form-control dt-post required" name="tipe_kriteria">
     </div>
   <!-- end form  -->
 </div>
@@ -126,8 +126,8 @@
         {data: 'DT_RowIndex', name: 'DT_RowIndex'},
         {data: 'kode_kriteria', name: 'kode_kriteria'},
         {data: 'nama_kriteria', name: 'nama_kriteria'}, 
-        {data: 'bobot', name: 'bobot'},
-        {data: 'jenis', name: 'jenis'},
+        {data: 'bobot_kriteria', name: 'bobot_kriteria'},
+        {data: 'tipe_kriteria', name: 'tipe_kriteria'},
         {data: 'action', name: 'action', orderable: false, searchable: false},
     ]
     });
@@ -137,8 +137,7 @@
     $('body').on('click', '.editData', function () {
 
         var data_id = $(this).data('id');
-        $.get("{{ route('kriteria.index') }}" +'/' + data_id +'/edit', function (data) {
-
+        $.get($(location).attr('href') +'/' + data_id +'/edit', function (data) {
             $('#saveBtn').html("Update");  
             $('#modalHeading').html("Edit Data");
             $('#modalBox').modal('show');
@@ -146,14 +145,36 @@
             $('#saveBtn').prop('disabled', false);
             // get data respone
             $('#data_id').val(data.id);
+
             $('#kode_kriteria').val(data.kode_kriteria);
             $('#nama_kriteria').val(data.nama_kriteria); 
-            $('#bobot').val(data.bobot);
-            $('#jenis').val(data.jenis);
-           
+            $('#bobot_kriteria').val(data.bobot_kriteria);
+            $('#tipe_kriteria').val(data.tipe_kriteria);
         })
-
         });
+        // end
+
+    // // edit data
+    // $('body').on('click', '.editData', function () {
+
+    //     var data_id = $(this).data('id');
+    //     $.get("{{ route('kriteria.index') }}" +'/' + data_id +'/edit', function (data) {
+
+    //         $('#saveBtn').html("Update");  
+    //         $('#modalHeading').html("Edit Data");
+    //         $('#modalBox').modal('show');
+    //         $("#errors-validate").hide();
+    //         $('#saveBtn').prop('disabled', false);
+    //         // get data respone
+    //         $('#data_id').val(data.id);
+    //         $('#kode_kriteria').val(data.kode_kriteria);
+    //         $('#nama_kriteria').val(data.nama_kriteria); 
+    //         $('#bobot_kriteria').val(data.bobot_kriteria);
+    //         $('#tipe_kriteria').val(data.tipe_kriteria);
+           
+    //     })
+
+    //     });
 
     // end
     
@@ -214,45 +235,37 @@
     
     // delete
     $('body').on('click', '.deleteData', function () {
-
-        var data_id = $(this).data("id");
-        Swal.fire({
-        title: "Apa kamu yakin?",
-        text: "Menghapus data ini!",
-        icon: "warning",
-        buttons: [
-        'Tidak',
-        'Iya'
-        ],
-        dangerMode: true,
-        }).then(function(isConfirm) {
-        if (isConfirm) {
-        Swal.fire({
-        title: 'Selamat!',
-        text: 'Data berhasil di hapus!',
-        icon: 'success'
-        }).then(function() {
-            $.ajax({
-                type: "DELETE",
-                url: "{{ route('kriteria.store') }}"+'/'+data_id,
-                success: function (data) {
-                    table.draw();
-                },
-                error: function (data) {
-                    console.log('Error:', data);
-                }
+                var data_id = $(this).data("id");
+                Swal.fire({
+                    title: "Apa kamu yakin?",
+                    text: "Menghapus data ini!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes!',
+                    dangerMode: true,
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        Swal.fire(
+                          'Terhapus!',
+                          'Data berhasil dihapus.',
+                          'success'
+                        )
+                        $.ajax({
+                            type: "DELETE",
+                            url: "{{ route('kriteria.store') }}"+'/'+data_id,
+                            success: function (data) {
+                                table.draw();
+                            },
+                            error: function (data) {
+                                console.log('Error:', data);
+                            }
+                        });
+                    }
+                })
             });
-        });
-        } else {
-        Swal.fire("Cencel", "Data tidak jadi dihapus :)", "error");
-        }
-        })
-
-
-        });
-
-    // end
-
+            // end delete
     // end function 
     });
 

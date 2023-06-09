@@ -10,6 +10,9 @@
     <meta name="description" content="Vuexy admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
     <meta name="keywords" content="admin template, Vuexy admin template, dashboard template, flat admin template, responsive admin template, web app">
     <meta name="author" content="PIXINVENT">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script> 
     <title> @yield('title') Sistem Pendukung Keputusan</title>
     <link rel="apple-touch-icon" href="{{asset('app-assets/images/ico/apple-icon-120.png')}}">
     <link rel="shortcut icon" type="image/x-icon" href="{{asset('app-assets/images/ico/favicon.ico')}}">
@@ -18,7 +21,7 @@
     <!-- BEGIN: Vendor CSS-->
     <link rel="stylesheet" type="text/css" href="{{asset('app-assets/vendors/css/vendors.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('app-assets/vendors/css/charts/apexcharts.css')}}">
-    {{-- <link rel="stylesheet" type="text/css" href="{{asset('app-assets/vendors/css/extensions/shepherd-theme-default.css')}}"> --}}
+    <link rel="stylesheet" type="text/css" href="{{asset('app-assets/vendors/css/extensions/shepherd-theme-default.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('app-assets/vendors/css/extensions/tether-theme-arrows.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('app-assets/vendors/css/extensions/tether.min.css')}}">
     <!-- END: Vendor CSS-->
@@ -255,16 +258,17 @@
             <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
                 {{-- jika diklik makan tombol akan active focus --}}
 
-                
+
                 
 
                 <li class="nav-item"><a href="/"><i class="feather icon-home"></i><span class="menu-title" data-i18n="Dashboard">Dashboard</span></a></li>
                 <li class=" navigation-header"><span>Apps</span>
                 </li>
                 <li class="nav-item"><a href="/kriteria"><i class="feather icon-box"></i><span class="menu-title" data-i18n="Form Layout">Data Kriteria</span></a></li>
-                <li class="nav-item"><a href="/subkriteria"><i class="feather icon-package"></i><span class="menu-title" data-i18n="Form Wizard">Data Sub Kriteria</span></a></li>
                 <li class="nav-item"><a href="/alternatif"><i class="feather icon-users"></i><span class="menu-title" data-i18n="Form Wizard">Data Alternatif</span></a></li>
                 <li class="nav-item"><a href="/penilaian"><i class="feather icon-file-text"></i><span class="menu-title" data-i18n="Form Wizard">Data Penilaian</span></a></li>
+                <li class="nav-item"><a href="/perhitungan"><i class="feather icon-sliders"></i><span class="menu-title" data-i18n="Form Wizard">Data Penilaian</span></a></li>
+                
             </ul>
         </div>
     </div>
@@ -298,6 +302,17 @@
     <!-- BEGIN: Vendor JS-->
     <script src="{{asset('app-assets/vendors/js/vendors.min.js')}}"></script>
     <!-- BEGIN Vendor JS-->
+
+    {{-- <script>
+        // keyboard focus
+        $(document).ready(function() {
+            $('.nav-item').click(function() {
+                $('.nav-item').removeClass('active');
+                $(this).addClass('active');
+            });
+        });
+    </script> --}}
+
 
     @stack('before-script')
     

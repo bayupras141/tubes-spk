@@ -10,4 +10,10 @@ class Alternatif extends Model
     use HasFactory;
 
     protected $table = 'alternatif';
+    protected $fillable = ['id','kode_alternatif','nama_alternatif'];
+
+    public function penilaian()
+    {
+        return $this->hasMany(Penilaian::class);
+    }
 }

@@ -10,4 +10,11 @@ class Kriteria extends Model
     use HasFactory;
 
     protected $table = 'kriteria';
+    protected $fillable = [
+        'id', 
+        'kode_kriteria', 
+        'nama_kriteria', 
+        'tipe_kriteria', 
+        'bobot_kriteria'
+    ];
 }
