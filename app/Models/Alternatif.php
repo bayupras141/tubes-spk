@@ -11,9 +11,4 @@ class Alternatif extends Model
 
     protected $table = 'alternatif';
     protected $fillable = ['id','kode_alternatif','nama_alternatif'];
-
-    public function penilaian()
-    {
-        return $this->hasMany(Penilaian::class);
-    }
 }

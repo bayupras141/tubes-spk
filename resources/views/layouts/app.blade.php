@@ -266,7 +266,6 @@
                 </li>
                 <li class="nav-item"><a href="/kriteria"><i class="feather icon-box"></i><span class="menu-title" data-i18n="Form Layout">Data Kriteria</span></a></li>
                 <li class="nav-item"><a href="/alternatif"><i class="feather icon-users"></i><span class="menu-title" data-i18n="Form Wizard">Data Alternatif</span></a></li>
-                <li class="nav-item"><a href="/penilaian"><i class="feather icon-file-text"></i><span class="menu-title" data-i18n="Form Wizard">Data Penilaian</span></a></li>
                 <li class="nav-item"><a href="/perhitungan"><i class="feather icon-sliders"></i><span class="menu-title" data-i18n="Form Wizard">Data Penilaian</span></a></li>
                 
             </ul>

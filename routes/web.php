@@ -3,7 +3,6 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AlternatifController;
 use App\Http\Controllers\KriteriaController;
-use App\Http\Controllers\PenilaianController;
 use App\Http\Controllers\PerhitunganController;
 
 /*
@@ -24,6 +23,5 @@ Route::get('/', function () {
 Route::resources([
     'alternatif' => AlternatifController::class,
     'kriteria' => KriteriaController::class,
-    'penilaian' => PenilaianController::class,
     'perhitungan' => PerhitunganController::class,
 ]);

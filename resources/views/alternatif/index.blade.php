@@ -116,31 +116,27 @@
     });
 
     // get data
+    // get data
     var table = $('.data-table').DataTable({
     processing: true,
     serverSide: true,
     ajax: "{{ route('alternatif.index') }}",
-    var html = '';
-        var i;
-        var no = 1;
-        for(i=0; i<data.length; i++){ 
-            html += '<tr>'+
-                    '<td>'+no+'</td>'+
-                    '<td>'+data[i].kode_alternatif+'</td>'+
-                    '<td>'+data[i].nama_alternatif+'</td>'+
-                    '<td>'+data[i].penilaian.c1+'</td>'+
-                    '<td>'+data[i].penilaian.c2+'</td>'+
-                    '<td>'+data[i].penilaian.c3+'</td>'+
-                    '<td>'+data[i].penilaian.c4+'</td>'+
-                    '<td>'+data[i].penilaian.c5+'</td>'+
-                    '<td>'+data[i].penilaian.c6+'</td>'+
-                    
-                    '</tr>';
-            no ++;
-        } 
-        $('#dataAlternatif').html(html);
-        })
+    columns: [
+        {data: 'DT_RowIndex', name: 'DT_RowIndex'},
+        {data: 'kode_alternatif', name: 'kode_alternatif'},
+        {data: 'nama_alternatif', name: 'nama_alternatif'},
+        {data: "c1", name: "c1"},
+        {data: "c2", name: "c2"},
+        {data: "c3", name: "c3"},
+        {data: "c4", name: "c4"},
+        {data: "c5", name: "c5"},
+        {data: "c6", name: "c6"},
+        
 
+        
+
+        // {data: 'action', name: 'action', orderable: false, searchable: false},
+    ]
     });
 
     // edit data
