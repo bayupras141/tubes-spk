@@ -7,7 +7,7 @@
 <div class="card">
     {{-- foreach by kriteria --}}
     <div class="card-header border-bottom p-1">
-        <div class="head-label"><h6 class="mb-0">Sub Kriteria</h6></div>
+        <div class="head-label"><h6 class="mb-0">Alternatif</h6></div>
         <button id="createNewData" class="dt-button create-new btn btn-primary" tabindex="0" aria-controls="DataTables_Table_0" type="button"  >
             <span>
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus mr-50 font-small-4">
