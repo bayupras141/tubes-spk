@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Alternatif;
+use Illuminate\Support\Facades\DB;
 
 class AlternatifSeeder extends Seeder
 {
@@ -82,6 +83,6 @@ class AlternatifSeeder extends Seeder
             ],
         ];
 
-        DB::table('alternatifs')->insert($data);
+        DB::table('alternatif')->insert($data);
     }
 }
