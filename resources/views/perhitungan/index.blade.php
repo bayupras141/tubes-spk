@@ -87,8 +87,8 @@
                     @endforeach
                 </tr>
                 @endforeach
-
                 {{-- tampilkan array sumMatriks --}}
+                <td></td>
                 <tr class="table-primary">
                     <td>{{ number_format($sumMatriks[0], 8) }}</td>
                     <td>{{ number_format($sumMatriks[1], 8) }}</td>
@@ -97,7 +97,16 @@
                     <td>{{ number_format($sumMatriks[4], 8) }}</td>
                     <td>{{ number_format($sumMatriks[5], 8) }}</td>
                 </tr>
-
+                <td></td>
+                {{-- tampilkan array nmatriks --}}
+                @foreach ($nmatriks as $item)
+                <tr>
+                    @foreach ($item as $i)
+                    <td>{{ number_format($i, 8) }}</td>
+                    @endforeach
+                </tr>
+                @endforeach
+                {{-- tampilkan array sumNMatriks --}}
             </tbody>
         </table>
         </div>
