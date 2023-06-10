@@ -70,6 +70,65 @@ class PerhitunganController extends Controller
             }
         }
 
+        // menentukan bobot kriteria berdasarkan roc 
+        $bobotC1 =(1+(1/2)+(1/3)+(1/4)+(1/5)+(1/6)) / 6;
+        $bobotC2 =(0+(1/2)+(1/3)+(1/4)+(1/5)+(1/6)) / 6;
+        $bobotC3 =(0+(0)+(1/3)+(1/4)+(1/5)+(1/6)) / 6;
+        $bobotC4 =(0+(0)+(0)+(1/4)+(1/5)+(1/6)) / 6;
+        $bobotC5 =(0+(0)+(0)+(0)+(1/5)+(1/6)) / 6;
+        $bobotC6 =(0+(0)+(0)+(0)+(0)+(1/6)) / 6;
+
+        $bobotROC = [];
+        $bobotROC = [$bobotC1, $bobotC2, $bobotC3, $bobotC4, $bobotC5, $bobotC6];
+
+        $kriteriaRoc = [];
+
+
+        // hitung nmatriks * bobot menggunakan
+        $bmatriks = [];
+        for ($i=0; $i < count($nmatriks); $i++) { 
+            for ($j=0; $j < count($nmatriks[$i]); $j++) { 
+                $bmatriks[$i][$j] = $nmatriks[$i][$j] * $bobotROC[$j];
+            }
+        }
+
+        // hitung baris matriks untuk Menentukan Nilai Fungsi Optimum
+        $sumBmatriks = [];
+        for ($i=0; $i < count($bmatriks); $i++) { 
+            $sumBmatriks[$i] = 0;
+            for ($j=0; $j < count($bmatriks[$i]); $j++) { 
+                $sumBmatriks[$i] += $bmatriks[$i][$j];
+            }
+        }
+
+        // dd($sumBmatriks[0]);
+
+        //Menentukan Tingkatan Peringkat/Prioritas Kelayakan bagi sumBmatriks 
+        $prioritas = [];
+        for ($i=0; $i < count($sumBmatriks); $i++) { 
+            $prioritas[$i] = $sumBmatriks[$i] / $sumBmatriks[0];
+        }
+        
+        // perankingan buang baris pertama pada prioritas
+
+        // perankingan berdasarkan nilai prioritas terbesar
+        array_shift($prioritas);
+        // rsort($prioritas);
+        $perankingan = [];
+        for ($i=0; $i < count($prioritas); $i++) { 
+            $perankingan[$i] = [
+                'alternatif' => $alternatif[$i]->nama_alternatif,
+                'nilai' => $prioritas[$i],
+            ];
+        }
+        // urutkan berdasarkan nilai terbesar
+        usort($perankingan, function($a, $b) {
+            return $b['nilai'] <=> $a['nilai'];
+        });
+
+        // dd($perankingan);
+
+
         return view('perhitungan.index', compact(
             'alternatif', 
             'kriteria', 
@@ -87,7 +146,13 @@ class PerhitunganController extends Controller
             'sumC6',
             'matriks',
             'sumMatriks',
-            'nmatriks'
+            'nmatriks',
+            'bobotROC',
+            'bmatriks',
+            'sumBmatriks',
+            'prioritas',
+            'perankingan'
+
         ));
     }
 }
