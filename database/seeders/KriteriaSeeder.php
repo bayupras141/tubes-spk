@@ -27,8 +27,6 @@ class KriteriaSeeder extends Seeder
                 'nama_kriteria' => 'Katering',
                 'jenis' => 'Cost',
                 'bobot' => 0.15,
-                'created_at' => '2023-06-04 03:08:44',
-                'updated_at' => '2023-06-04 03:08:44',
             ],
             [
                 'id' => 3,
@@ -36,8 +34,6 @@ class KriteriaSeeder extends Seeder
                 'nama_kriteria' => 'Busana dan Rias Pengantin',
                 'jenis' => 'Cost',
                 'bobot' => 0.15,
-                'created_at' => '2023-06-04 03:26:22',
-                'updated_at' => '2023-06-04 03:26:22',
             ],
             [
                 'id' => 4,
@@ -45,8 +41,6 @@ class KriteriaSeeder extends Seeder
                 'nama_kriteria' => 'Dokumentasi',
                 'jenis' => 'Cost',
                 'bobot' => 0.15,
-                'created_at' => '2023-06-04 03:26:43',
-                'updated_at' => '2023-06-04 03:26:43',
             ],
             [
                 'id' => 5,
@@ -54,8 +48,6 @@ class KriteriaSeeder extends Seeder
                 'nama_kriteria' => 'Jumlah Tamu',
                 'jenis' => 'Benefit',
                 'bobot' => 0.20,
-                'created_at' => '2023-06-04 03:27:03',
-                'updated_at' => '2023-06-04 03:27:03',
             ],
             [
                 'id' => 6,
