@@ -7,6 +7,11 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
+## Requirement
+1. PHP 8.0+
+2. Composer v2.2+
+3. MySQL 5.7+
+
 ## Langkah langkah instalasi
 1. Clone repository ini
 2. Jalankan perintah `composer install`
