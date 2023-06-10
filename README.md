@@ -11,6 +11,7 @@
 1. Clone repository ini
 2. Jalankan perintah `composer install`
 3. Copy file `.env.example` menjadi `.env`
+4. Jalankan perintah `php artisan key:generate`
 
 ## Konfigurasi database
 1. Buat database baru
