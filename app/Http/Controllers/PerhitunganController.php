@@ -21,7 +21,7 @@ class PerhitunganController extends Controller
         $maxC5 = Alternatif::max('c5');
         $minC6 = Alternatif::min('c6');
 
-        // sum data C1 + minC1
+        //jumlah sum data C1 + minC1 
         $sumC1 = Alternatif::sum('c1') + $minC1;
         $sumC2 = Alternatif::sum('c2') + $minC2;
         $sumC3 = Alternatif::sum('c3') + $minC3;
@@ -62,7 +62,13 @@ class PerhitunganController extends Controller
             }
         }
 
-        
+        // matriks dibagi sumMatriks 
+        $nmatriks = [];
+        for ($i=0; $i < count($matriks); $i++) { 
+            for ($j=0; $j < count($matriks[$i]); $j++) { 
+                $nmatriks[$i][$j] = $matriks[$i][$j] / $sumMatriks[$j];
+            }
+        }
 
         return view('perhitungan.index', compact(
             'alternatif', 
@@ -80,7 +86,8 @@ class PerhitunganController extends Controller
             'sumC5',
             'sumC6',
             'matriks',
-            'sumMatriks'
+            'sumMatriks',
+            'nmatriks'
         ));
     }
 }
