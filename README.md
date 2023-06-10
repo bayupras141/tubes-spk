@@ -8,7 +8,7 @@
 </p>
 
 ## Requirement
-1. PHP 8.0+
+1. PHP 8.1+
 2. Composer v2.2+
 3. MySQL 5.7+
 
