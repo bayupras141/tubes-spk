@@ -15,6 +15,12 @@ return new class extends Migration
             $table->id();
             $table->string('kode_alternatif');
             $table->string('nama_alternatif');
+            $table->Integer('c1');
+            $table->Integer('c2');
+            $table->Integer('c3');
+            $table->Integer('c4');
+            $table->Integer('c5');
+            $table->Integer('c6');
             $table->timestamps();
         });
     }
