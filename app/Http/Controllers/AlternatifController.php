@@ -52,7 +52,45 @@ class AlternatifController extends Controller
      */
     public function store(Request $request)
     {
-        //
+            $validator = Validator::make($request->all(), [
+                'kode_alternatif' => 'required',
+                'nama_alternatif' => 'required',
+                'c1' => 'required',
+                'c2' => 'required',
+                'c3' => 'required',
+                'c4' => 'required',
+                'c5' => 'required',
+                'c6' => 'required',
+            ]);
+    
+            if ($validator->fails()) {
+                return response()->json(['errors' => $validator->errors()->all()]);
+            }
+    
+            Alternatif::updateOrCreate(
+                ['id' => $request->data_id],
+                [
+                    'kode_alternatif' => $request->kode_alternatif,
+                    'nama_alternatif' => $request->nama_alternatif,
+                    'c1' => $request->c1,
+                    'c2' => $request->c2,
+                    'c3' => $request->c3,
+                    'c4' => $request->c4,
+                    'c5' => $request->c5,
+                    'c6' => $request->c6,
+                ]
+            );
+            if(!$request->data_id == ''){
+                return response()->json([
+                    'status' => 'sukses',
+                    'message'=>'Alternatif berhasil Diubah'
+                ],200);
+            } else {
+                return response()->json([
+                    'status' => 'sukses',
+                    'message'=>'Alternatif berhasil Ditambahkan'
+                ],200);
+            }
     }
 
     /**
@@ -66,9 +104,11 @@ class AlternatifController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Alternatif $alternatif)
+    public function edit($id)
     {
-        //
+        $data = Alternatif::find($id);
+        return response()->json($data, 200);
+
     }
 
     /**
@@ -82,8 +122,13 @@ class AlternatifController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Alternatif $alternatif)
+    public function destroy($id)
     {
-        //
+        $alternatif = Alternatif::find($id);
+        $alternatif->delete();
+        return response()->json([
+            'status' => 'sukses',
+            'message'=>'Alternatif berhasil Dihapus'
+        ],200);
     }
 }

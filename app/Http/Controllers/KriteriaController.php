@@ -21,8 +21,6 @@ class KriteriaController extends Controller
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
 
-                        
-                      
                         $btn =  '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="edit" class="text-secondary editData">
                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2 "><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
                         </a> | <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Delete" class="text-secondary deleteData">
@@ -63,7 +61,7 @@ class KriteriaController extends Controller
 
         // store with update or create
         Kriteria::updateOrCreate(
-            ['id' => $request->id],
+            ['id' => $request->data_id],
             [
                 'kode_kriteria' => $request->kode_kriteria,
                 'nama_kriteria' => $request->nama_kriteria,
@@ -75,12 +73,12 @@ class KriteriaController extends Controller
         if(!$request->data_id == ''){
             return response()->json([
                 'status' => 'sukses',
-                'message'=>'Paket berhasil Diubah'
+                'message'=>'Kriteria berhasil Diubah'
             ],200);
         } else {
             return response()->json([
                 'status' => 'sukses',
-                'message'=>'Paket berhasil Ditambahkan'
+                'message'=>'Kriteria berhasil Ditambahkan'
             ],200);
         }
     }
@@ -96,10 +94,13 @@ class KriteriaController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Kriteria $kriteria)
+    public function edit($id)
     {
+        $kriteria = Kriteria::find($id);
+        // dd($kriteria);
         return response()->json($kriteria, 200);
     }
+
 
     /**
      * Update the specified resource in storage.
@@ -112,8 +113,9 @@ class KriteriaController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Kriteria $kriteria)
+    public function destroy($id)
     {
+        $kriteria = Kriteria::find($id);
         $kriteria->delete();
         return response()->json([
             'status' => 'sukses',

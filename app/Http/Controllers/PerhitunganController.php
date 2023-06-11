@@ -78,11 +78,9 @@ class PerhitunganController extends Controller
         $bobotC5 =(0+(0)+(0)+(0)+(1/5)+(1/6)) / 6;
         $bobotC6 =(0+(0)+(0)+(0)+(0)+(1/6)) / 6;
 
+
         $bobotROC = [];
         $bobotROC = [$bobotC1, $bobotC2, $bobotC3, $bobotC4, $bobotC5, $bobotC6];
-
-        $kriteriaRoc = [];
-
 
         // hitung nmatriks * bobot menggunakan
         $bmatriks = [];
@@ -101,19 +99,15 @@ class PerhitunganController extends Controller
             }
         }
 
-        // dd($sumBmatriks[0]);
-
         //Menentukan Tingkatan Peringkat/Prioritas Kelayakan bagi sumBmatriks 
         $prioritas = [];
         for ($i=0; $i < count($sumBmatriks); $i++) { 
             $prioritas[$i] = $sumBmatriks[$i] / $sumBmatriks[0];
         }
         
-        // perankingan buang baris pertama pada prioritas
 
         // perankingan berdasarkan nilai prioritas terbesar
         array_shift($prioritas);
-        // rsort($prioritas);
         $perankingan = [];
         for ($i=0; $i < count($prioritas); $i++) { 
             $perankingan[$i] = [

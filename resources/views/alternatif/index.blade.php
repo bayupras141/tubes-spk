@@ -19,6 +19,12 @@
         </button>
     </div>
     <div class="container">
+        {{-- fix style width agar tidak beruhab --}}
+    <style>
+        .data-table{
+            width: 100% !important;
+        }
+    </style>
     <table class="data-table table">
         <thead>
             <tr>
@@ -31,6 +37,7 @@
                 <th>C4</th>
                 <th>C5</th>
                 <th>C6</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody id="dataAlternatif">
@@ -75,6 +82,30 @@
     <div class="form-group">
         <label class="form-label" for="basic-icon-default-post">Nama Alternatif</label>
         <input type="text" id="nama_alternatif" class="form-control dt-post required" name="nama_alternatif">
+    </div>
+    <div class="form-group">
+        <label class="form-label" for="basic-icon-default-post">C1</label>
+        <input type="text" id="c1" class="form-control dt-post required" name="c1">
+    </div>
+    <div class="form-group">
+        <label class="form-label" for="basic-icon-default-post">C2</label>
+        <input type="text" id="c2" class="form-control dt-post required" name="c2">
+    </div>
+    <div class="form-group">
+        <label class="form-label" for="basic-icon-default-post">C3</label>
+        <input type="text" id="c3" class="form-control dt-post required" name="c3">
+    </div>
+    <div class="form-group">
+        <label class="form-label" for="basic-icon-default-post">C4</label>
+        <input type="text" id="c4" class="form-control dt-post required" name="c4">
+    </div>
+    <div class="form-group">
+        <label class="form-label" for="basic-icon-default-post">C5</label>
+        <input type="text" id="c5" class="form-control dt-post required" name="c5">
+    </div>
+    <div class="form-group">
+        <label class="form-label" for="basic-icon-default-post">C6</label>
+        <input type="text" id="c6" class="form-control dt-post required" name="c6">
     </div>
   <!-- end form  -->
 </div>
@@ -131,11 +162,7 @@
         {data: "c4", name: "c4"},
         {data: "c5", name: "c5"},
         {data: "c6", name: "c6"},
-        
-
-        
-
-        // {data: 'action', name: 'action', orderable: false, searchable: false},
+        {data: 'action', name: 'action', orderable: false, searchable: false},
     ]
     });
 
@@ -151,36 +178,17 @@
             $('#saveBtn').prop('disabled', false);
             // get data respone
             $('#data_id').val(data.id);
-
             $('#kode_alternatif').val(data.kode_alternatif);
             $('#nama_alternatif').val(data.nama_alternatif);
+            $('#c1').val(data.c1);
+            $('#c2').val(data.c2);
+            $('#c3').val(data.c3);
+            $('#c4').val(data.c4);
+            $('#c5').val(data.c5);
+            $('#c6').val(data.c6);
         })
         });
         // end
-
-    // // edit data
-    // $('body').on('click', '.editData', function () {
-
-    //     var data_id = $(this).data('id');
-    //     $.get("{{ route('kriteria.index') }}" +'/' + data_id +'/edit', function (data) {
-
-    //         $('#saveBtn').html("Update");  
-    //         $('#modalHeading').html("Edit Data");
-    //         $('#modalBox').modal('show');
-    //         $("#errors-validate").hide();
-    //         $('#saveBtn').prop('disabled', false);
-    //         // get data respone
-    //         $('#data_id').val(data.id);
-    //         $('#kode_kriteria').val(data.kode_kriteria);
-    //         $('#nama_kriteria').val(data.nama_kriteria); 
-    //         $('#bobot_kriteria').val(data.bobot_kriteria);
-    //         $('#tipe_kriteria').val(data.tipe_kriteria);
-           
-    //     })
-
-    //     });
-
-    // end
     
     // button create new data
     $('#createNewData').click(function () {
@@ -239,37 +247,52 @@
     
     // delete
     $('body').on('click', '.deleteData', function () {
-                var data_id = $(this).data("id");
-                Swal.fire({
-                    title: "Apa kamu yakin?",
-                    text: "Menghapus data ini!",
-                    icon: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes!',
-                    dangerMode: true,
-                }).then((result) => {
-                    if (result.isConfirmed) {
+        // delete berdasarkan route delete
+        var data_id = $(this).data("id");
+        Swal.fire({
+            title: 'Apakah kamu yakin?',
+            text: "Anda tidak dapat mengembalikan data yang sudah dihapus!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Ya, Hapus!',
+            cancelButtonText: 'Tidak, Batalkan!',
+            reverseButtons: true
+            }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                    type: "DELETE",
+                    // gunaknak url route delete
+                    url: "{{ url('alternatif') }}/" + data_id,
+                    success: function (data) {
+                        table.draw();
                         Swal.fire(
-                          'Terhapus!',
-                          'Data berhasil dihapus.',
-                          'success'
+                        'Deleted!',
+                        'Data berhasil dihapus.',
+                        'success'
                         )
-                        $.ajax({
-                            type: "DELETE",
-                            url: "{{ route('alternatif.store') }}"+'/'+data_id,
-                            success: function (data) {
-                                table.draw();
-                            },
-                            error: function (data) {
-                                console.log('Error:', data);
-                            }
-                        });
+                    },
+                    error: function (data) {
+                        console.log('Error:', data);
+                        Swal.fire(
+                        'Cancelled',
+                        'Data gagal dihapus :)',
+                        'error'
+                        )
                     }
-                })
-            });
-            // end delete
+                });
+            } else if (
+            /* Read more about handling dismissals below */
+            result.dismiss === Swal.DismissReason.cancel
+            ) {
+            Swal.fire(
+                'Cancelled',
+                'Data gagal dihapus :)',
+                'error'
+            )
+            }
+        })
+    });
+    // end delete
     // end function 
     });
 

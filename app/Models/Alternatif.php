@@ -10,5 +10,5 @@ class Alternatif extends Model
     use HasFactory;
 
     protected $table = 'alternatif';
-    protected $fillable = ['id','kode_alternatif','nama_alternatif'];
+    protected $fillable = ['id','kode_alternatif','nama_alternatif', 'c1', 'c2', 'c3', 'c4', 'c5', 'c6'];
 }

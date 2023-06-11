@@ -25,3 +25,8 @@ Route::resources([
     'kriteria' => KriteriaController::class,
     'perhitungan' => PerhitunganController::class,
 ]);
+
+// buat route delete kriteria
+Route::delete('/kriteria/{id}', [KriteriaController::class, 'destroy'])->name('kriteria.destroy');
+Route::delete('/alternatif/{id}', [KriteriaController::class, 'destroy'])->name('alternatif.destroy');
+

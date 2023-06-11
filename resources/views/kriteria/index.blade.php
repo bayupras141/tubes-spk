@@ -133,50 +133,6 @@
     });
     // end 
 
-    // edit data
-    $('body').on('click', '.editData', function () {
-
-        var data_id = $(this).data('id');
-        $.get($(location).attr('href') +'/' + data_id +'/edit', function (data) {
-            $('#saveBtn').html("Update");  
-            $('#modalHeading').html("Edit Data");
-            $('#modalBox').modal('show');
-            $("#errors-validate").hide();
-            $('#saveBtn').prop('disabled', false);
-            // get data respone
-            $('#data_id').val(data.id);
-
-            $('#kode_kriteria').val(data.kode_kriteria);
-            $('#nama_kriteria').val(data.nama_kriteria); 
-            $('#bobot_kriteria').val(data.bobot_kriteria);
-            $('#tipe_kriteria').val(data.tipe_kriteria);
-        })
-        });
-        // end
-
-    // // edit data
-    // $('body').on('click', '.editData', function () {
-
-    //     var data_id = $(this).data('id');
-    //     $.get("{{ route('kriteria.index') }}" +'/' + data_id +'/edit', function (data) {
-
-    //         $('#saveBtn').html("Update");  
-    //         $('#modalHeading').html("Edit Data");
-    //         $('#modalBox').modal('show');
-    //         $("#errors-validate").hide();
-    //         $('#saveBtn').prop('disabled', false);
-    //         // get data respone
-    //         $('#data_id').val(data.id);
-    //         $('#kode_kriteria').val(data.kode_kriteria);
-    //         $('#nama_kriteria').val(data.nama_kriteria); 
-    //         $('#bobot_kriteria').val(data.bobot_kriteria);
-    //         $('#tipe_kriteria').val(data.tipe_kriteria);
-           
-    //     })
-
-    //     });
-
-    // end
     
     // button create new data
     $('#createNewData').click(function () {
@@ -230,44 +186,79 @@
                 }
             })
         }
+    // end
 
+    // edit data
+    $('body').on('click', '.editData', function () {
+        var data_id = $(this).data('id');
+            $.get("{{ route('kriteria.index') }}" +'/' + data_id +'/edit', function (data) {
+                // console.log(data);
+            $('#saveBtn').html("Update");  
+            $('#modalHeading').html("Edit Data");
+            $('#modalBox').modal('show');
+            $("#errors-validate").hide();
+            $('#saveBtn').prop('disabled', false);
+            // get data respone
+            $('#data_id').val(data.id);
+            $('#kode_kriteria').val(data.kode_kriteria);
+            $('#nama_kriteria').val(data.nama_kriteria); 
+            $('#bobot_kriteria').val(data.bobot_kriteria);
+            $('#tipe_kriteria').val(data.tipe_kriteria);
+        })
+    });
     // end
     
     // delete
     $('body').on('click', '.deleteData', function () {
-                var data_id = $(this).data("id");
-                Swal.fire({
-                    title: "Apa kamu yakin?",
-                    text: "Menghapus data ini!",
-                    icon: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes!',
-                    dangerMode: true,
-                }).then((result) => {
-                    if (result.isConfirmed) {
+        // delete berdasarkan route delete
+        var data_id = $(this).data("id");
+        Swal.fire({
+            title: 'Apakah kamu yakin?',
+            text: "Anda tidak dapat mengembalikan data yang sudah dihapus!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Ya, Hapus!',
+            cancelButtonText: 'Tidak, Batalkan!',
+            reverseButtons: true
+            }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                    type: "DELETE",
+                    // gunaknak url route delete
+                    url: "{{ url('alternatif') }}/" + data_id,
+                    success: function (data) {
+                        table.draw();
                         Swal.fire(
-                          'Terhapus!',
-                          'Data berhasil dihapus.',
-                          'success'
+                        'Deleted!',
+                        'Data berhasil dihapus.',
+                        'success'
                         )
-                        $.ajax({
-                            type: "DELETE",
-                            url: "{{ route('kriteria.store') }}"+'/'+data_id,
-                            success: function (data) {
-                                table.draw();
-                            },
-                            error: function (data) {
-                                console.log('Error:', data);
-                            }
-                        });
+                    },
+                    error: function (data) {
+                        console.log('Error:', data);
+                        Swal.fire(
+                        'Cancelled',
+                        'Data gagal dihapus :)',
+                        'error'
+                        )
                     }
-                })
-            });
-            // end delete
-    // end function 
+                });
+            } else if (
+            /* Read more about handling dismissals below */
+            result.dismiss === Swal.DismissReason.cancel
+            ) {
+            Swal.fire(
+                'Cancelled',
+                'Data gagal dihapus :)',
+                'error'
+            )
+            }
+        })
     });
+    // end delete
+
+    // end function 
+});
 
     </script>
 @endpush

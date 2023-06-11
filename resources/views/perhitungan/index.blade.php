@@ -206,11 +206,10 @@
                 </tr>
             </thead>
             <tbody>
-                {{-- tampilkan array matriks multidimensi dari $bmatriks --}}
+                <?php $no = 0 ?>
                 @foreach ($sumBmatriks as $item)
                 <tr>
-                    {{-- loop number start 0 --}}
-                    {{-- <td>{{ 0++ }}</td> --}}
+                    <td style="font-weight:bold;">S{{ $no++ }}</td>
                     <td>{{ $item }}</td>
                 </tr>
                 @endforeach
@@ -239,11 +238,10 @@
                 </tr>
             </thead>
             <tbody>
-                {{-- tampilkan array matriks multidimensi dari $bmatriks --}}
+                <?php $no = 0 ?>
                 @foreach ($prioritas as $item)
                 <tr>
-                    {{-- loop number start 0 --}}
-                    {{-- <td>{{ 0++ }}</td> --}}
+                    <td style="font-weight:bold;">K{{ $no++ }}</td>
                     <td>{{ $item }}</td>
                 </tr>
                 @endforeach
@@ -272,11 +270,13 @@
                 </tr>
             </thead>
             <tbody>
+                <?php $no = 1 ?>
                 @foreach ($perankingan as $item)
                 <tr>
                     @foreach ($item as $i)
                     <td>{{ $i }}</td>
                     @endforeach
+                    <td style="font-weight:bold;">{{ $no++ }}</td>
                 </tr>
                 @endforeach
             </tbody>
