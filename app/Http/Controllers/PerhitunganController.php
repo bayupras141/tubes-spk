@@ -105,14 +105,13 @@ class PerhitunganController extends Controller
             $prioritas[$i] = $sumBmatriks[$i] / $sumBmatriks[0];
         }
         
-
-        // perankingan berdasarkan nilai prioritas terbesar
-        array_shift($prioritas);
+        $prioritasp = $prioritas;
+        array_shift($prioritasp);
         $perankingan = [];
-        for ($i=0; $i < count($prioritas); $i++) { 
+        for ($i=0; $i < count($prioritasp); $i++) { 
             $perankingan[$i] = [
                 'alternatif' => $alternatif[$i]->nama_alternatif,
-                'nilai' => $prioritas[$i],
+                'nilai' => $prioritasp[$i],
             ];
         }
         // urutkan berdasarkan nilai terbesar
